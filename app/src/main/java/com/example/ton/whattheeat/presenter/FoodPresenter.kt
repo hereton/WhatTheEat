@@ -7,7 +7,6 @@ import kotlin.collections.ArrayList
 
 class FoodPresenter(private val view:FoodView, private val repository:FoodRepository):Observer {
 
-    private var food = Food()
     fun start(){
         repository.addObserver(this)
         repository.loadAllFood()

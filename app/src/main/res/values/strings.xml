@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WhatTheEat</string>
+    <string name="action_home" />
 </resources>

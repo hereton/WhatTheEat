@@ -17,6 +17,9 @@ abstract class FoodRepository:Observable() {
         setChanged()
         notifyObservers()
     }
+    fun getFood(withSelectedBar:String){
+
+    }
 
 
 }

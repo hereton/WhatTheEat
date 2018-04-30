@@ -45,10 +45,6 @@ class ProfileActivity : AppCompatActivity() {
             println("something")
         }
         if(map.isNotEmpty()){
-
-
-
-
             foodAllergy = map["foodAllergy"] as ArrayList<String>
             val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, foodAllergy)
             cant_listView_id.adapter = adapter
@@ -154,8 +150,6 @@ class ProfileActivity : AppCompatActivity() {
         } catch(e:IOException){
              e.printStackTrace()
         }
-
-
 
     }
 

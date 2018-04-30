@@ -25,9 +25,9 @@ class SpinnerActivity : AppCompatActivity(), FoodView {
 
     private lateinit var foodPresenter:FoodPresenter
     private lateinit var foodRepo:FoodRepository
+    private lateinit var map:HashMap<String, ArrayList<String>>
 
     override fun setFood(food: Food) {
-
         val task = ImageLoader(food)
         task.execute()
         food_name_id.text = food.foodName
@@ -46,6 +46,8 @@ class SpinnerActivity : AppCompatActivity(), FoodView {
         foodRepo = MockFoodRepository()
         foodPresenter = FoodPresenter(this,foodRepo)
         foodPresenter.start()
+        map = HashMap()
+        loadDataFromLocalStorage()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -70,21 +72,27 @@ class SpinnerActivity : AppCompatActivity(), FoodView {
 
 
     fun onGetFoodButtonClicked(view:View){
-        foodPresenter.getFood()
-    try{
-        val fis = this.openFileInput("whatTheEat")
-        val ois = ObjectInputStream(fis)
-        val newMap = ois.readObject() as MutableMap<*, *>
-        println(newMap["foodAllergy"].toString())
+        if(can_checkBox_id.isChecked){
+            println("Checked")
+            foodPresenter.getFood(map["foodAllergy"] as ArrayList<String>)
+        }else{
+            println("UnChecked")
+            foodPresenter.getFood()
+        }
     }
-    catch (e:FileNotFoundException){
-        println("File not found")
-    }
+
+    private fun loadDataFromLocalStorage(){
+        try{
+            val fis = this.openFileInput("whatTheEat")
+            val ois = ObjectInputStream(fis)
+            map = ois.readObject() as HashMap<String, ArrayList<String>>
+        }
+        catch (e:FileNotFoundException){
+            println("File not found")
+        }
         catch (e:Exception){
             println("something")
         }
-
-
     }
 
 

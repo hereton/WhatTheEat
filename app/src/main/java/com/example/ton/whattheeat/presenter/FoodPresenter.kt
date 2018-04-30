@@ -21,4 +21,7 @@ class FoodPresenter(private val view:FoodView, private val repository:FoodReposi
     fun getFood(){
         repository.getFood()
     }
+    fun getFood(myAllergyFood:ArrayList<String>){
+        repository.getFood(myAllergyFood)
+    }
 }

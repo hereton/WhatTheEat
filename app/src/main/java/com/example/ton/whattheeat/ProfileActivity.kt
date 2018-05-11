@@ -11,7 +11,6 @@ import android.widget.Spinner
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_profile.*
 import java.io.*
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -31,7 +30,7 @@ class ProfileActivity : AppCompatActivity() {
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
 
-        typeOfFoodList = arrayListOf("meat","seafood")
+        typeOfFoodList = arrayListOf("meat","seafood","soup")
         foodAllergy = ArrayList()
         map = hashMapOf()
 
@@ -83,6 +82,10 @@ class ProfileActivity : AppCompatActivity() {
                 val foodType = spinner.selectedItem.toString()
                 if(!foodAllergy.contains(foodType)){
                     foodAllergy.add(foodType)
+                    if(foodAllergy.size == typeOfFoodList.size){
+                        foodAllergy.remove(foodType)
+                        Toast.makeText(this,"You have to eat something",Toast.LENGTH_SHORT).show()
+                    }
                 }
                 val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, foodAllergy)
                 cant_listView_id.adapter = adapter

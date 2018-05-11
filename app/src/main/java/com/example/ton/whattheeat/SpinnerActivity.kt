@@ -42,7 +42,6 @@ class SpinnerActivity : AppCompatActivity(), FoodView {
 
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
-
         foodRepo = MockFoodRepository()
         foodPresenter = FoodPresenter(this,foodRepo)
         foodPresenter.start()
@@ -50,8 +49,10 @@ class SpinnerActivity : AppCompatActivity(), FoodView {
         loadDataFromLocalStorage()
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.spinnermenu, menu)
+        println("creating")
         return true
     }
 
@@ -72,9 +73,14 @@ class SpinnerActivity : AppCompatActivity(), FoodView {
 
 
     fun onGetFoodButtonClicked(view:View){
+        loadDataFromLocalStorage()
         if(can_checkBox_id.isChecked){
             println("Checked")
-            foodPresenter.getFood(map["foodAllergy"] as ArrayList<String>)
+            if(map["foodAllergy"]!!.size != 0 ) {
+                foodPresenter.getFood(map["foodAllergy"] as ArrayList<String>)
+            }else{
+                foodPresenter.getFood()
+            }
         }else{
             println("UnChecked")
             foodPresenter.getFood()
@@ -94,8 +100,6 @@ class SpinnerActivity : AppCompatActivity(), FoodView {
             println("something")
         }
     }
-
-
     @SuppressLint("StaticFieldLeak")
     inner class ImageLoader(private val food:Food):AsyncTask<String,String,InputStream>(){
         override fun doInBackground(vararg p0: String?): InputStream {

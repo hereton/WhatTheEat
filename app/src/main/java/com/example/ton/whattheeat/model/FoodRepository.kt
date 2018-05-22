@@ -19,11 +19,10 @@ abstract class FoodRepository:Observable() {
     }
     fun getFood(myAllergyFood:ArrayList<String>){
         println("get food allergy")
-        var tempFoodList = ArrayList<Food>()
-        myAllergyFood.forEach { type
-            -> tempFoodList.addAll(foodList.filter {
-            food
-            -> food.foodType != type })
+        val tempFoodList = ArrayList<Food>()
+        foodList.forEach { type -> if(!myAllergyFood.contains(type.foodType)){
+                tempFoodList.add(type)
+            }
         }
         food = tempFoodList[(rand.nextInt(tempFoodList.size))]
         setChanged()

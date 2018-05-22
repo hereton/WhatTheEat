@@ -114,13 +114,18 @@
         android:id="@+id/can_checkBox_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
         android:text="Get the Food only I can eat" />
 
     <Button
         android:id="@+id/getFood_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
         android:onClick="onGetFoodButtonClicked"
         android:text="Get Food !" />
 
